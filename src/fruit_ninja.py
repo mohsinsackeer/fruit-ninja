@@ -1,32 +1,28 @@
 import pygame
-import sys
+import functions as F
+from flying_object import FlyingObject
 
 
 def run_game():
-    # Initializing all imported pygame modules
-    pygame.init()
 
-    # Setup the screen: (screen width, screen height)
-    screen = pygame.display.set_mode((1344, 756))
+    """
+    This function is responsible for running the entire
+    Fruit Ninja game.
+    """
 
-    # Set Caption
-    pygame.display.set_caption('Fruit Ninja')
-
-    # Background image for the game
-    bg = pygame.image.load('images/bg.jpg')
-    bg = pygame.transform.scale(bg, (1344, 756))
+    fn_settings, screen, background_image = F.initialize_game_components()
+    obj = FlyingObject(fn_settings, screen, bomb=True)
 
     # Starting the main loop for the game
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+        F.check_events()
 
         # Draw the background image on the Pygame surface
-        screen.blit(bg, (0, 0))
-        pygame.display.flip()
+        screen.blit(background_image, (0, 0))
+        obj.blitme()
 
-    # Create the screen
+        # Display the new screen
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
