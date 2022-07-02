@@ -27,7 +27,7 @@ def initialize_game_components():
     return fn_settings, screen, background_image, stats
 
 
-def check_events(fn_settings, screen, flying_objects):
+def check_events(fn_settings, screen, stats, flying_objects):
 
     """
     This function keeps tracks of the each event occuring
@@ -38,6 +38,9 @@ def check_events(fn_settings, screen, flying_objects):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == fn_settings.flying_object_timer_event:
+            stats.event_counter += 1
+            if stats.event_counter % 10 == 0:
+                stats.level_up()
             obj = get_next_object(fn_settings, screen)
             flying_objects.add(obj)
     

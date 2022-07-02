@@ -15,7 +15,7 @@ def run_game():
 
     # Starting the main loop for the game
     while True:
-        F.check_events(fn_settings, screen, flying_objects)
+        F.check_events(fn_settings, screen, stats, flying_objects)
 
         # Update the position of fruit
         F.update_flying_objects(fn_settings, stats, flying_objects)
