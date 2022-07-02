@@ -23,7 +23,6 @@ def initialize_game_components():
     background_image = pygame.image.load(fn_settings.screen_img_loc)
     background_image = pygame.transform.scale(background_image, (fn_settings.screen_width, fn_settings.screen_height))
     stats = GameStats(fn_settings)
-    stats.reset_stats()
     pygame.time.set_timer(fn_settings.flying_object_timer_event, fn_settings.flying_object_time_delay)
     return fn_settings, screen, background_image, stats
 
