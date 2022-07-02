@@ -14,6 +14,9 @@ class Settings():
         self.flying_object_time_delay = 1000
         self.flying_object_timer_event = pygame.USEREVENT
         self.flying_object_speed = 1
+        
+        # Game Life Settings
+        self.total_lives = 5
 
         # Image Locations
         self.fruit_locations = {
