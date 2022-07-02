@@ -1,6 +1,7 @@
 import pygame
 import functions as F
 from flying_object import FlyingObject
+from pygame.sprite import Group
 
 
 def run_game():
@@ -11,15 +12,20 @@ def run_game():
     """
 
     fn_settings, screen, background_image = F.initialize_game_components()
-    obj = FlyingObject(fn_settings, screen, bomb=True)
+    flying_objects = Group()
+
+    pygame.time.set_timer(fn_settings.timer_event, fn_settings.time_delay)
 
     # Starting the main loop for the game
     while True:
-        F.check_events()
+        F.check_events(fn_settings, screen, flying_objects)
+
+        # Update the position of fruit
+        F.update_flying_objects(fn_settings, screen, flying_objects)
 
         # Draw the background image on the Pygame surface
         screen.blit(background_image, (0, 0))
-        obj.blitme()
+        flying_objects.draw(screen)
 
         # Display the new screen
         pygame.display.flip()

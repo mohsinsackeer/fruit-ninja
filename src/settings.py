@@ -9,6 +9,11 @@ class Settings():
         self.screen_width = 756  #1344
         self.screen_caption = "Fruit Ninja"
 
+        # Flying Object Settings
+        self.time_delay = 1000
+        self.timer_event = pygame.USEREVENT
+        self.object_speed = 1
+
         # Image Locations
         self.fruit_locations = {
             'coconut' : '../images/coconut.bmp',
@@ -21,12 +26,12 @@ class Settings():
 
         # Object Pop Up Locations
         self.popup_locations = {
-            1   :   {'x':int(self.screen_width*0.2), 'y':0},
-            2   :   {'x':int(self.screen_width*0.8), 'y':0},
-            3   :   {'x':self.screen_width, 'y':int(self.screen_height*0.2)},
-            4   :   {'x':self.screen_width, 'y':int(self.screen_height*0.8)},
-            5   :   {'x':int(self.screen_width*0.8), 'y':self.screen_height},
-            6   :   {'x':int(self.screen_width*0.2), 'y':self.screen_height},
-            7   :   {'x':0, 'y':int(self.screen_height*0.8)},
-            8   :   {'x':0, 'y':int(self.screen_height*0.2)}
+            1   :   {'x':self.screen_width*0.2, 'y':0},
+            2   :   {'x':self.screen_width*0.8, 'y':0},
+            3   :   {'x':self.screen_width, 'y':self.screen_height*0.2},
+            4   :   {'x':self.screen_width, 'y':self.screen_height*0.8},
+            5   :   {'x':self.screen_width*0.8, 'y':self.screen_height},
+            6   :   {'x':self.screen_width*0.2, 'y':self.screen_height},
+            7   :   {'x':0, 'y':self.screen_height*0.8},
+            8   :   {'x':0, 'y':self.screen_height*0.2}
         }
