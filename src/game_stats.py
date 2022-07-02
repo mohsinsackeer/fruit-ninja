@@ -1,6 +1,3 @@
-import pygame
-
-
 class GameStats():
 
     def __init__(self, fn_settings) -> None:

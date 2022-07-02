@@ -10,7 +10,7 @@ def run_game():
     Fruit Ninja game.
     """
 
-    fn_settings, screen, background_image, stats = F.initialize_game_components()
+    fn_settings, screen, background_image, stats, sb = F.initialize_game_components()
     flying_objects = Group()
 
     # Starting the main loop for the game
@@ -23,6 +23,7 @@ def run_game():
         # Draw the background image on the Pygame surface
         screen.blit(background_image, (0, 0))
         flying_objects.draw(screen)
+        sb.show_scoreboard()
 
         # Display the new screen
         pygame.display.flip()

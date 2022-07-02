@@ -4,6 +4,7 @@ import random
 from game_stats import GameStats
 from settings import Settings
 from flying_object import FlyingObject
+from scoreboard import ScoreBoard
 
 
 def initialize_game_components():
@@ -23,8 +24,9 @@ def initialize_game_components():
     background_image = pygame.image.load(fn_settings.screen_img_loc)
     background_image = pygame.transform.scale(background_image, (fn_settings.screen_width, fn_settings.screen_height))
     stats = GameStats(fn_settings)
+    sb = ScoreBoard(screen, stats)
     pygame.time.set_timer(fn_settings.flying_object_timer_event, fn_settings.flying_object_time_delay)
-    return fn_settings, screen, background_image, stats
+    return fn_settings, screen, background_image, stats, sb
 
 
 def check_events(fn_settings, screen, stats, flying_objects):
