@@ -7,12 +7,13 @@ class Settings():
         # Screen Settings
         self.screen_height = 756
         self.screen_width = 756  #1344
-        self.screen_caption = "Fruit Ninja"
+        self.screen_caption = 'Fruit Ninja'
+        self.screen_img_loc = '../images/bg.jpg'
 
         # Flying Object Settings
-        self.time_delay = 1000
-        self.timer_event = pygame.USEREVENT
-        self.object_speed = 1
+        self.flying_object_time_delay = 1000
+        self.flying_object_timer_event = pygame.USEREVENT
+        self.flying_object_speed = 1
 
         # Image Locations
         self.fruit_locations = {

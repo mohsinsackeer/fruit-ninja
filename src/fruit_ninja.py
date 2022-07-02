@@ -14,7 +14,7 @@ def run_game():
     fn_settings, screen, background_image = F.initialize_game_components()
     flying_objects = Group()
 
-    pygame.time.set_timer(fn_settings.timer_event, fn_settings.time_delay)
+    pygame.time.set_timer(fn_settings.flying_object_timer_event, fn_settings.flying_object_time_delay)
 
     # Starting the main loop for the game
     while True:

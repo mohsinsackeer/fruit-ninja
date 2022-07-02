@@ -18,7 +18,7 @@ def initialize_game_components():
     fn_settings = Settings()
     screen = pygame.display.set_mode((fn_settings.screen_width, fn_settings.screen_height))
     pygame.display.set_caption(fn_settings.screen_caption)
-    background_image = pygame.image.load('../images/bg.jpg')
+    background_image = pygame.image.load(fn_settings.screen_img_loc)
     background_image = pygame.transform.scale(background_image, (fn_settings.screen_width, fn_settings.screen_height))
     return fn_settings, screen, background_image
 
@@ -33,7 +33,7 @@ def check_events(fn_settings, screen, flying_objects):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        elif event.type == fn_settings.timer_event:
+        elif event.type == fn_settings.flying_object_timer_event:
             obj = get_next_object(fn_settings, screen)
             flying_objects.add(obj)
 
@@ -56,4 +56,3 @@ def update_flying_objects(fn_settings, screen, flying_objects):
         if (obj.rect.x<=0 or obj.rect.x>=fn_settings.screen_width) or\
             (obj.rect.y<=0 or obj.rect.y>=fn_settings.screen_height):
             flying_objects.remove(obj)
-    print(len(flying_objects))

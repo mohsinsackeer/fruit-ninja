@@ -8,8 +8,8 @@ class FlyingObject(Sprite):
     def __init__(self, fn_settings, screen, bomb=False) -> None:
         super().__init__()
 
-        self.fruit = True
-        self.bomb = False
+        self.fruit = not bomb
+        self.bomb = bomb
 
         self.fn_settings = fn_settings
         self.screen = screen
@@ -25,7 +25,8 @@ class FlyingObject(Sprite):
         self.start_loc_id = random.randint(1, 8)
         self.rect.x = self.fn_settings.popup_locations[self.start_loc_id]['x']
         self.rect.y = self.fn_settings.popup_locations[self.start_loc_id]['y']
-        print(self.start_loc_id, self.rect.x, self.rect.y)
+        msg = 'fruit' if self.fruit else 'bomb'
+        print(msg, self.start_loc_id, self.rect.x, self.rect.y)
 
         if self.start_loc_id in [3,4,7,8]:
             self.y_dir = 0
@@ -43,7 +44,7 @@ class FlyingObject(Sprite):
                 self.y_dir = -1
     
     def update(self) -> None:
-        self.loc += (self.x_dir + self.y_dir) * self.fn_settings.object_speed
+        self.loc += (self.x_dir + self.y_dir) * self.fn_settings.flying_object_speed
         if self.x_dir:
             self.rect.x = self.loc
         else:
