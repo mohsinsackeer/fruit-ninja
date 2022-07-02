@@ -36,6 +36,8 @@ def check_events(fn_settings, screen, flying_objects):
         elif event.type == fn_settings.flying_object_timer_event:
             obj = get_next_object(fn_settings, screen)
             flying_objects.add(obj)
+    
+    check_object_mouse_collision(flying_objects)
 
 
 def get_next_object(fn_settings, screen):
@@ -46,6 +48,17 @@ def get_next_object(fn_settings, screen):
         return FlyingObject(fn_settings, screen, bomb=False)
     else:
         return FlyingObject(fn_settings, screen, bomb=True)
+
+
+def check_object_mouse_collision(flying_objects):
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    for obj in flying_objects.copy():
+        collided = obj.rect.collidepoint(mouse_x, mouse_y)
+        if collided:
+            if obj.fruit:
+                flying_objects.remove(obj)
+            else:
+                sys.exit()
 
 
 def update_flying_objects(fn_settings, screen, flying_objects):
