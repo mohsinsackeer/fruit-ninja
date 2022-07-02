@@ -1,6 +1,5 @@
 import pygame
 import functions as F
-from flying_object import FlyingObject
 from pygame.sprite import Group
 
 
@@ -11,17 +10,15 @@ def run_game():
     Fruit Ninja game.
     """
 
-    fn_settings, screen, background_image = F.initialize_game_components()
+    fn_settings, screen, background_image, stats = F.initialize_game_components()
     flying_objects = Group()
-
-    pygame.time.set_timer(fn_settings.flying_object_timer_event, fn_settings.flying_object_time_delay)
 
     # Starting the main loop for the game
     while True:
         F.check_events(fn_settings, screen, flying_objects)
 
         # Update the position of fruit
-        F.update_flying_objects(fn_settings, screen, flying_objects)
+        F.update_flying_objects(fn_settings, stats, flying_objects)
 
         # Draw the background image on the Pygame surface
         screen.blit(background_image, (0, 0))
@@ -33,3 +30,4 @@ def run_game():
 
 if __name__ == '__main__':
     run_game()
+    
