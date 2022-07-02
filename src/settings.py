@@ -42,6 +42,9 @@ class Settings():
         self.flying_object_speed = 1
         self.flying_object_time_delay = 1000
         self.flying_object_timer_event = pygame.USEREVENT + 1
+
+        # Scoring Points
+        self.points_increment = 1
     
     def increase_speed(self):
         self.flying_object_speed += 0.1

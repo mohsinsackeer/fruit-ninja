@@ -1,6 +1,3 @@
-import pygame
-
-
 class GameStats():
 
     def __init__(self, fn_settings) -> None:
@@ -20,3 +17,6 @@ class GameStats():
         self.fn_settings.increase_speed()
         # Adjust Rate by changing the timer event
         self.fn_settings.reduce_time_delay(self.level)
+    
+    def award_points(self):
+        self.score = self.score + self.fn_settings.points_increment
