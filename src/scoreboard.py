@@ -28,7 +28,7 @@ class ScoreBoard():
         self.score_image = self.font.render(score_str, True,
                                             self.text_color)
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.x = self.screen_rect.centerx
+        self.score_rect.centerx = self.screen_rect.centerx
         self.score_rect.bottom = self.lives_left_rect.top - 5
     
     def prep_lives_left(self):
