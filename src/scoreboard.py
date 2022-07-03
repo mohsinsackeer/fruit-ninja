@@ -8,10 +8,10 @@ class ScoreBoard():
 
         self.screen_rect = self.screen.get_rect()
         self.text_color = (230, 230, 230)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(None, 32)
     
-    def prep_level(self):
-        level_str = f"Level: {self.stats.level}"
+    def prep_high_score(self):
+        level_str = f"High Score: {self.stats.high_score}"
         self.level_image = self.font.render(level_str, True,
                                             self.text_color)
         self.level_rect = self.level_image.get_rect()
@@ -28,8 +28,8 @@ class ScoreBoard():
         self.score_image = self.font.render(score_str, True,
                                             self.text_color)
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.centerx = self.screen_rect.centerx
-        self.score_rect.bottom = self.lives_left_rect.top - 5
+        self.score_rect.center = self.screen_rect.center
+        #self.score_rect.bottom = self.lives_left_rect.top - 5
     
     def prep_lives_left(self):
         lives_left_str = f"Lives Left: {self.stats.lives_left}"
@@ -37,7 +37,7 @@ class ScoreBoard():
                                             self.text_color)
         self.lives_left_rect = self.lives_left_image.get_rect()
         self.lives_left_rect.centerx = self.screen_rect.centerx
-        self.lives_left_rect.bottom = self.screen_rect.bottom - 5
+        self.lives_left_rect.top = self.score_rect.bottom + 5
 
     def show_score(self):
         self.screen.blit(self.level_image, self.level_rect)
@@ -45,7 +45,7 @@ class ScoreBoard():
         self.screen.blit(self.lives_left_image, self.lives_left_rect)
 
     def show_scoreboard(self):
-        self.prep_lives_left()
         self.prep_score()
-        self.prep_level()
+        self.prep_lives_left()
+        self.prep_high_score()
         self.show_score()

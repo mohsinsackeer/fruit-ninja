@@ -10,8 +10,14 @@ class Settings():
         self.screen_caption = 'Fruit Ninja'
         self.screen_img_loc = '../images/bg.jpg'
 
+        # User (Timed) Event
+        self.flying_object_timer_event = pygame.USEREVENT
+
         # Game Life Settings
         self.total_lives = 5
+
+        # Button Text
+        self.button_text = 'Play'
 
         # Image Locations
         self.fruit_locations = {
@@ -41,15 +47,17 @@ class Settings():
         # Flying Object Settings changes with Level Up
         self.flying_object_speed = 1
         self.flying_object_time_delay = 1000
-        self.flying_object_timer_event = pygame.USEREVENT + 1
+        
+        pygame.time.set_timer(self.flying_object_timer_event,
+                              self.flying_object_time_delay)
 
         # Scoring Points
-        self.points_increment = 1
+        self.points_increment = 10
     
     def increase_speed(self):
         self.flying_object_speed += 0.1
     
-    def reduce_time_delay(self, level):
+    def reduce_time_delay(self):
         """
         This function create a new timed user event, to create new
         flying fruit/bomb. We have set 500 ms as the minimum time possible
@@ -57,6 +65,5 @@ class Settings():
         """
         if self.flying_object_time_delay - 50 >= 500:
             self.flying_object_time_delay -= 50
-        self.flying_object_timer_event = pygame.USEREVENT + level
         pygame.time.set_timer(self.flying_object_timer_event, 
                                 self.flying_object_time_delay)

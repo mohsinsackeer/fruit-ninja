@@ -5,6 +5,7 @@ from game_stats import GameStats
 from settings import Settings
 from flying_object import FlyingObject
 from scoreboard import ScoreBoard
+from button import Button
 
 
 def initialize_game_components():
@@ -25,11 +26,11 @@ def initialize_game_components():
     background_image = pygame.transform.scale(background_image, (fn_settings.screen_width, fn_settings.screen_height))
     stats = GameStats(fn_settings)
     sb = ScoreBoard(screen, stats)
-    pygame.time.set_timer(fn_settings.flying_object_timer_event, fn_settings.flying_object_time_delay)
-    return fn_settings, screen, background_image, stats, sb
+    button = Button(fn_settings, screen)
+    return fn_settings, screen, background_image, stats, sb, button
 
 
-def check_events(fn_settings, screen, stats, flying_objects):
+def check_events(fn_settings, screen, stats, flying_objects, button):
 
     """
     This function keeps tracks of the each event occuring
@@ -40,13 +41,20 @@ def check_events(fn_settings, screen, stats, flying_objects):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == fn_settings.flying_object_timer_event:
-            stats.event_counter += 1
-            if stats.event_counter % 10 == 0:
-                stats.level_up()
-            obj = get_next_object(fn_settings, screen)
-            flying_objects.add(obj)
+            if stats.game_active:
+                release_next_object(fn_settings, screen, stats, flying_objects)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            check_button_clicked(fn_settings, stats, button)
     
     check_object_mouse_collision(stats, flying_objects)
+
+
+def release_next_object(fn_settings, screen, stats, flying_objects):
+    stats.event_counter += 1
+    if stats.event_counter % 10 == 0:
+        stats.level_up()
+    obj = get_next_object(fn_settings, screen)
+    flying_objects.add(obj)
 
 
 def get_next_object(fn_settings, screen):
@@ -68,7 +76,16 @@ def check_object_mouse_collision(stats, flying_objects):
                 flying_objects.remove(obj)
                 stats.award_points()
             else:
-                sys.exit()
+                game_ends(stats, flying_objects)
+
+def check_button_clicked(fn_settings, stats, button):
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    button_clicked = button.rect.collidepoint(mouse_x, mouse_y)
+
+    if button_clicked and not stats.game_active:
+        fn_settings.reset_settings()
+        stats.reset_stats()
+        stats.game_active = True
 
 
 def update_flying_objects(fn_settings, stats, flying_objects):
@@ -82,4 +99,8 @@ def update_flying_objects(fn_settings, stats, flying_objects):
             if obj.fruit:
                 stats.lives_left -= 1
                 if not stats.lives_left:
-                    sys.exit()            
+                    game_ends(stats, flying_objects)
+
+def game_ends(stats, flying_objects):
+    stats.game_active = False
+    flying_objects.empty()    

@@ -10,12 +10,12 @@ def run_game():
     Fruit Ninja game.
     """
 
-    fn_settings, screen, background_image, stats, sb = F.initialize_game_components()
+    fn_settings, screen, background_image, stats, sb, button = F.initialize_game_components()
     flying_objects = Group()
 
     # Starting the main loop for the game
     while True:
-        F.check_events(fn_settings, screen, stats, flying_objects)
+        F.check_events(fn_settings, screen, stats, flying_objects, button)
 
         # Update the position of fruit
         F.update_flying_objects(fn_settings, stats, flying_objects)
@@ -24,6 +24,8 @@ def run_game():
         screen.blit(background_image, (0, 0))
         flying_objects.draw(screen)
         sb.show_scoreboard()
+        if not stats.game_active:
+            button.draw_button()
 
         # Display the new screen
         pygame.display.flip()
