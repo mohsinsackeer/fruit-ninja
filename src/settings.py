@@ -5,8 +5,8 @@ class Settings():
     def __init__(self) -> None:
 
         # Screen Settings
-        self.screen_height = 756
-        self.screen_width = 756  #1344
+        self.screen_height = 900 #756
+        self.screen_width = 900 #756  #1344
         self.screen_caption = 'Fruit Ninja'
         self.screen_img_loc = '../images/bg.jpg'
 

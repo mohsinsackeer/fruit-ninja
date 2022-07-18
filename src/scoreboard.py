@@ -28,8 +28,8 @@ class ScoreBoard():
         self.score_image = self.font.render(score_str, True,
                                             self.text_color)
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.center = self.screen_rect.center
-        #self.score_rect.bottom = self.lives_left_rect.top - 5
+        self.score_rect.centerx = self.screen_rect.centerx
+        self.score_rect.top = self.screen_rect.centery + 50
     
     def prep_lives_left(self):
         lives_left_str = f"Lives Left: {self.stats.lives_left}"
@@ -49,3 +49,4 @@ class ScoreBoard():
         self.prep_lives_left()
         self.prep_high_score()
         self.show_score()
+  

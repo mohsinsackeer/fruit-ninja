@@ -18,7 +18,7 @@ class Button:
         # Build the button's rect object and center it
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.centerx = self.screen_rect.centerx
-        self.rect.y = self.fn_settings.screen_height * 0.3
+        self.rect.y = self.fn_settings.screen_height * 0.4
 
         # The button message needs to be prepped only once
         self.prep_msg(self.fn_settings.button_text)
