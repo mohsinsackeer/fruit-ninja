@@ -24,6 +24,9 @@ def initialize_game_components():
     pygame.display.set_caption(fn_settings.screen_caption)
     background_image = pygame.image.load(fn_settings.screen_img_loc)
     background_image = pygame.transform.scale(background_image, (fn_settings.screen_width, fn_settings.screen_height))
+    pygame.mixer.music.load(fn_settings.bg_music_location)
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.play(-1)
     stats = GameStats(fn_settings)
     sb = ScoreBoard(screen, stats)
     button = Button(fn_settings, screen)
@@ -45,8 +48,8 @@ def check_events(fn_settings, screen, stats, flying_objects, button):
                 release_next_object(fn_settings, screen, stats, flying_objects)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             check_button_clicked(fn_settings, stats, button)
-    
-    check_object_mouse_collision(stats, flying_objects)
+
+    check_object_mouse_collision(fn_settings, stats, flying_objects)
 
 
 def release_next_object(fn_settings, screen, stats, flying_objects):
@@ -67,15 +70,17 @@ def get_next_object(fn_settings, screen):
         return FlyingObject(fn_settings, screen, bomb=True)
 
 
-def check_object_mouse_collision(stats, flying_objects):
+def check_object_mouse_collision(fn_settings, stats, flying_objects):
     mouse_x, mouse_y = pygame.mouse.get_pos()
     for obj in flying_objects.copy():
         collided = obj.rect.collidepoint(mouse_x, mouse_y)
         if collided:
             if obj.fruit:
+                fn_settings.fruit_slice_sound.play()
                 flying_objects.remove(obj)
                 stats.award_points()
             else:
+                fn_settings.bomb_collision_sound.play()
                 game_ends(stats, flying_objects)
 
 def check_button_clicked(fn_settings, stats, button):

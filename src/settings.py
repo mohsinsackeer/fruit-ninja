@@ -5,10 +5,17 @@ class Settings():
     def __init__(self) -> None:
 
         # Screen Settings
-        self.screen_height = 756
-        self.screen_width = 756  #1344
+        self.screen_height = 900 #756
+        self.screen_width = 900 #756  #1344
         self.screen_caption = 'Fruit Ninja'
         self.screen_img_loc = '../images/bg.jpg'
+
+        # Music Settings
+        self.bg_music_location = '../sounds/Fruit-Ninja-Theme-Song.mp3'
+        self.fruit_slice_sound_location = '../sounds/Sword-swipe-1.wav'
+        self.bomb_collision_sound_location = '../sounds/Bomb-explode.wav'
+        self.fruit_slice_sound = pygame.mixer.Sound(self.fruit_slice_sound_location)
+        self.bomb_collision_sound = pygame.mixer.Sound(self.bomb_collision_sound_location)
 
         # User (Timed) Event
         self.flying_object_timer_event = pygame.USEREVENT
